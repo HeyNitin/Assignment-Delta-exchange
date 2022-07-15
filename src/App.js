@@ -7,7 +7,6 @@ export default function App() {
   const [data, setData] = useState([]);
 
   // I'm using cors-anywhere as proxy, as api call is blocked by cors.
-
   useEffect(() => {
     (async () => {
       try {
@@ -18,6 +17,9 @@ export default function App() {
         );
         setData(result.slice(0, 35));
       } catch (error) {
+        error.response.status === 429
+          ? alert("You've hit the api limit, try later")
+          : alert("Something went wrong!");
         console.log(error);
       }
     })();

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 const TableData = ({ symbol, description, underlying_asset }) => {
   const [markPrice, setMarkPrice] = useState("");
+  const [loader, setLoader] = useState(true);
 
   useEffect(() => {
     let socket = new WebSocket("wss://production-esocket.delta.exchange");
@@ -22,10 +23,15 @@ const TableData = ({ symbol, description, underlying_asset }) => {
       );
     };
     socket.onmessage = function (event) {
-      setMarkPrice(JSON.parse(event.data).mark_price);
+      const res = JSON.parse(event.data).mark_price;
+      if (res) {
+        setMarkPrice(res);
+        setLoader(false);
+      }
     };
 
     socket.onerror = function (error) {
+      setLoader(true);
       console.log(error);
     };
   }, [symbol]);
@@ -36,7 +42,7 @@ const TableData = ({ symbol, description, underlying_asset }) => {
         <td className="column">{symbol}</td>
         <td>{description}</td>
         <td>{underlying_asset.symbol}</td>
-        <td>{markPrice}</td>
+        <td>{loader ? "Loading..." : markPrice}</td>
       </tr>
     </tbody>
   );
