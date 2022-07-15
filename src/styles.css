@@ -1,0 +1,25 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+table,
+th,
+td {
+  border: 1px solid black;
+}
+
+th {
+  padding: 1rem;
+  top: 0;
+  height: 5rem;
+  box-sizing: border-box;
+  position: sticky;
+  background-color: white;
+}
+
+.column {
+  top: 5rem;
+  position: sticky;
+  background-color: white;
+}
