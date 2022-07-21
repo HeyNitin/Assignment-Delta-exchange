@@ -13,7 +13,7 @@ export default function App() {
         const {
           data: { result }
         } = await axios.get(
-          "https://cors-anywhere.herokuapp.com/https://api.delta.exchange/v2/products"
+          "https://corsanywhere.herokuapp.com/https://api.delta.exchange/v2/products"
         );
         setData(result.slice(0, 35));
       } catch (error) {
